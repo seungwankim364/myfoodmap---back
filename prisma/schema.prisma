@@ -43,7 +43,7 @@ model Review {
   restaurant   Restaurant @relation(fields: [restaurantId], references: [restaurantId])
   restaurantId Int
 
-  rating       Int
+  rating       Int	  @default(5)
   content      String     @db.Text
   imageUrl     String?
   menuName     String

@@ -5,6 +5,7 @@ const prisma = require('../db');
 
 const router = express.Router();
 
+
 // 1. 회원가입 API
 router.post('/signup', async (req, res) => {
     const { username, nickname, password } = req.body;
