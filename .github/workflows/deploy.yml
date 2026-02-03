@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'myfoodmap-back/**' # (중요) 백엔드 폴더 이름이 backend라면! 아니면 이 줄 지워.
+    #paths:
+      #- 'myfoodmap-back/**' # (중요) 백엔드 폴더 이름이 backend라면! 아니면 이 줄 지워.
 
 jobs:
   deploy:
@@ -30,7 +30,7 @@ jobs:
             --description "This is a revision for the application" \
             --ignore-hidden-files \
             --s3-location s3://mzc-ksw-myfoodmap-backend-651914029420/myfoodmap---back.zip \
-            --source myfoodmap---back 
+            --source .
 
       # CodeDeploy에게 "배포해!"라고 명령하기
       - name: Create CodeDeploy Deployment
