@@ -22,7 +22,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
 
-      # S3에 배포 파일 압축해서 올리기
+      # S3에 배포 파일 압축해서 업로드하기
       - name: Upload to S3
         run: |
           aws deploy push \
