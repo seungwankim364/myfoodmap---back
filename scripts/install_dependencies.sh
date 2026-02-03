@@ -1,20 +1,19 @@
 #!/bin/bash
 
-# 1. 내가 누구인지, 어디에 있는지 로그 남기기 (나중에 에러 잡기 좋음)
-echo "Current User: $(whoami)" >> /home/ubuntu/deploy_log.txt
-echo "Node Path check: $(which node)" >> /home/ubuntu/deploy_log.txt
-
-# 2. 작업 폴더로 이동 (없으면 만들고)
-mkdir -p /home/ubuntu/myfoodmap-server
+# 1. 프로젝트 폴더로 이동
 cd /home/ubuntu/myfoodmap-server
 
-# 3. 설치 시작 (명령어 앞에 'sudo' 붙여서 권한 문제 원천 봉쇄)
-# ⭐ 중요: 그냥 npm 말고, 아까 확인한 '절대 경로'를 쓰세요!
-# (만약 which npm 결과가 /usr/bin/npm 이라면)
-/usr/bin/npm install
+# 2. 혹시 이전에 root로 실행해서 꼬였을 수 있으니, 폴더 주인님을 'ubuntu'로 되찾기 (중요!)
+sudo chown -R ubuntu:ubuntu /home/ubuntu/myfoodmap-server
 
-# 4. Prisma 생성
-/usr/bin/npx prisma generate
+# 3. 로컬 패키지 설치 (여긴 sudo 쓰면 안 됨! 내 폴더니까!)
+echo "Installing project dependencies..."
+npm install
 
-# 5. PM2 설치 (이미 있으면 넘어감)
-/usr/bin/npm install pm2 -g
+# 4. Prisma 클라이언트 생성
+echo "Generating Prisma client..."
+npx prisma generate
+
+# 5. PM2 설치 (⭐ 여기가 문제였음! 전역 설치니까 sudo 필수!)
+echo "Installing/Updating PM2..."
+sudo npm install -g pm2
