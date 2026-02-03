@@ -5,4 +5,5 @@ cd /home/ubuntu/myfoodmap-server
 pm2 stop all || true
 
 # 서버 시작 (index.js가 메인 파일이라고 가정. app.js면 바꿔줘!)
-pm2 start index.js --name "myfoodmap-backend" --update-env
+#확인
+pm2 start app.js --name "myfoodmap-backend" --update-env
