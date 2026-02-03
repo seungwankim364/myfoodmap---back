@@ -1,11 +1,18 @@
 #!/bin/bash
+
+# 1. 환경변수 불러오기 (npm 명령어를 찾기 위해 필수!)
+source /home/ubuntu/.profile
+
+# 2. 폴더로 이동 (없으면 에러 나니까 -p로 만들고 이동)
+mkdir -p /home/ubuntu/myfoodmap-server
 cd /home/ubuntu/myfoodmap-server
 
-# 1. 라이브러리 설치
+# 3. 설치 시작
+echo "Installing dependencies..."
 npm install
 
-# 2. Prisma 클라이언트 생성 (⭐ 중요! 이거 없으면 에러남)
+echo "Generating Prisma client..."
 npx prisma generate
 
-# 3. PM2 (서버 관리 도구) 설치 (없으면 설치)
-npm install pm2 -g
+echo "Installing PM2..."
+sudo npm install pm2 -g
