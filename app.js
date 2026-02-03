@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
   res.send('서버가 정상적으로 작동 중입니다!');
 });
 
-// 4. 라우터 등록
+// 4. 라우터 설정
 app.use('/api/auth', authRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/upload', uploadRoutes);

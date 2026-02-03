@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'myfoodmap-backend/**' # (중요) 백엔드 폴더 이름이 backend라면! 아니면 이 줄 지워.
+      - 'myfoodmap-back/**' # (중요) 백엔드 폴더 이름이 backend라면! 아니면 이 줄 지워.
 
 jobs:
   deploy:
