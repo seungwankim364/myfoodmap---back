@@ -67,6 +67,33 @@ router.post('/',
     }
   });
 
+// 1.5. 전체 리뷰 목록 가져오기 (지도에 뿌릴 때 사용)
+// GET /api/reviews 요청이 오면 이 코드가 실행됩니다!
+router.get('/', async (req, res) => {
+  try {
+    const reviews = await prisma.review.findMany({
+      include: {
+        restaurant: true, // 식당 정보도 같이 가져오기
+      },
+      orderBy: {
+        visitDate: 'desc', // 최신순 정렬
+      },
+      take: 100, // (선택사항) 지도에 너무 많이 뜨면 렉 걸리니까 100개만
+    });
+    
+    // 프론트엔드가 쓰기 편하게 데이터 구조 정리
+    const formattedReviews = reviews.map(r => ({
+       ...r.restaurant, 
+       ...r 
+    }));
+
+    res.json(formattedReviews);
+  } catch (err) {
+    console.error('전체 리뷰 조회 에러:', err);
+    res.status(500).json({ message: '서버 에러' });
+  }
+});
+
 // 2. 유저의 전체 리뷰 목록과 통계 가져오기 (검증 필요)
 router.get('/:username',
   [
