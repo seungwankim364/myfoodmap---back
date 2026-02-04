@@ -18,6 +18,7 @@ app.use(cors({
     'http://localhost:3000',                    // 로컬 테스트용
     'https://djdq0vag5e2jx.cloudfront.net',     // 클라우드프론트 (HTTPS)
     'http://djdq0vag5e2jx.cloudfront.net'      // 클라우드프론트 (HTTP)
+    'http://mzc-ksw-myfoodmap-alb-1068475815.ap-northeast-2.elb.amazonaws.com' // ⭐ ALB 주소도 반드시 추가!
   ],
   credentials: true, // 인증 정보(토큰 등) 허용
 }));
