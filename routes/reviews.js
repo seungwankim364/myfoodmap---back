@@ -73,21 +73,20 @@ router.get('/', async (req, res) => {
   try {
     const reviews = await prisma.review.findMany({
       include: {
-        restaurant: true, // 식당 정보도 같이 가져오기
+        restaurant: true,
       },
       orderBy: {
-        visitDate: 'desc', // 최신순 정렬
+        visitDate: 'desc',
       },
-      take: 100, // (선택사항) 지도에 너무 많이 뜨면 렉 걸리니까 100개만
     });
     
-    // 프론트엔드가 쓰기 편하게 데이터 구조 정리
     const formattedReviews = reviews.map(r => ({
        ...r.restaurant, 
        ...r 
     }));
 
-    res.json(formattedReviews);
+    // ⭐ 핵심: 프론트엔드에서 'reviews'라는 이름으로 꺼내 쓸 수 있게 객체로 감싸줍니다.
+    res.json({ reviews: formattedReviews }); 
   } catch (err) {
     console.error('전체 리뷰 조회 에러:', err);
     res.status(500).json({ message: '서버 에러' });
