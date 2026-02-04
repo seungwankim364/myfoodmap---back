@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+
 const path = require('path');
 require('dotenv').config();
 
@@ -11,7 +12,15 @@ const uploadRoutes = require('./routes/upload');
 const app = express();
 
 // 1. 미들웨어 설정
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',                    // 로컬 개발용 (Vite)
+    'http://localhost:3000',                    // 로컬 테스트용
+    'https://djdq0vag5e2jx.cloudfront.net',     // 클라우드프론트 (HTTPS)
+    'http://djdq0vag5e2jx.cloudfront.net'      // 클라우드프론트 (HTTP)
+  ],
+  credentials: true, // 인증 정보(토큰 등) 허용
+}));
 app.use(express.json());
 // uploads 폴더를 정적 경로로 설정
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
